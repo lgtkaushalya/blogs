@@ -5,6 +5,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class BlogController extends Controller {
   public function listAction() {
-    return $this->render('BlogBundle:Blog:list.html.twig');
+
+    $posts = $this->getDoctrine()
+      ->getRepository('BlogBundle:Post')
+      ->findAll();
+
+    return $this->render('BlogBundle:Blog:list.html.twig', array('posts' => $posts));
   }
 }
